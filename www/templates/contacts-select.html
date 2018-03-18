@@ -1,0 +1,12 @@
+<ion-modal-view>
+  <ion-header-bar>
+    <a class="button icon-left ion-chevron-left button-clear button-dark" ng-click="closeModalAddContactFriends()"></a>
+    <h1 class="title">Ajouter des amis</h1>
+    <a class="button icon-right ion-checkmark-round button-clear button-dark" ng-click="addContactFriends()"></a>
+  </ion-header-bar>
+  <ion-content padding="true">
+    <ion-list>
+      <ion-checkbox ng-model="checkContacts[contact.id]" ng-repeat="contact in contactsToAdd">{{contact.displayName}}</ion-checkbox>
+    </ion-list>
+  </ion-content>
+</ion-modal-view>

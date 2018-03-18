@@ -1,0 +1,35 @@
+<ion-modal-view>
+  <ion-header-bar>
+    <a class="button icon-left ion-chevron-left button-clear button-dark" ng-click="closeModal()"></a>
+    <h1 class="title">Modification évènement</h1>
+  </ion-header-bar>
+  <ion-content padding="true">
+    <label class="item item-input">
+      <span class="input-label">Titre</span>
+      <input type="text" ng-model="event.title">
+    </label>
+    <div class="row" style="padding: 0;">
+      <div class="col col-80" style="padding: 0; text-align: center;">
+        <label class="item-input" style="margin: 0; padding: 0;">
+          <img ng-src="{{event.picture}}" style="max-width: 100%; max-height: 300px; margin: auto;"/>
+        </label>
+      </div>
+      <div class="col col-20" style="padding: 0; margin:auto; text-align: center;">
+        <a class="button ion-android-camera button-clear button-dark" style="padding = 0; margin: auto;" ng-click="getPicture('camera')"></a>
+        <a class="button ion-images button-clear button-dark" style="padding = 0; margin: auto;" ng-click="getPicture('library')"></a>
+      </div>
+    </div>
+    <label class="item item-input">
+      <span class="input-label">Date</span>
+      <input type="date" ng-model="event.date">
+    </label>
+    <label class="item item-input">
+      <span class="input-label">Heure</span>
+      <input type="time" ng-model="event.time">
+    </label>
+    <label class="item item-input item-stacked-label" style="border-bottom: 0px;">
+      <span class="input-label">Description</span>
+      <textarea id="description-edit" ng-model="event.description" rows="10" ng-click="resizeTextarea()" ng-change="resizeTextarea()"></textarea>
+    </label>
+  </ion-content>
+</ion-modal-view>

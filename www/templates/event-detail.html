@@ -1,0 +1,89 @@
+<ion-view view-title="" cache-view="false">
+
+        <ion-tabs class="tabs-icon-top tabs-color-active tabs-striped">
+          <ion-tab title="Infos" icon-off="ion-ios-information-outline" icon-on="ion-ios-information">
+            <ion-header-bar>
+              <a class="button icon-left ion-chevron-left button-clear button-dark" ui-sref="events"></a>
+              <h1 class="title">{{event.title}}</h1>
+              <a class="button icon-right ion-edit button-clear button-dark" ng-click="openModal()"></a>
+            </ion-header-bar>
+
+            <ion-content padding="true">
+              <div padding="true" style="text-align: center;">
+                <img ng-src="{{event.picture}}" style="max-width: 100%; max-height: 200px;"/>
+              </div>
+              <div class="row" style="padding: 0;">
+                <div class="col col-50">
+                  <h4>Date</h4>
+                  {{event.date | date: 'dd MMMM yyyy'}}
+                </div>
+                <div class="col col-50" style="text-align: right;" ng-show="event.time != undefined">
+                  <h4>Heure</h4>
+                  {{event.time | date: 'HH'}}h{{event.time | date: 'mm'}}
+                </div>
+              </div>
+              <h3  ng-show="event.description != undefined">Description</h3>
+              <p>
+                {{event.description}}
+              </p>
+            </ion-content>
+          </ion-tab>
+
+
+
+          <ion-tab title="Lieu" icon-off="ion-ios-location-outline" icon-on="ion-ios-location">
+            <ion-header-bar>
+              <a class="button icon-left ion-chevron-left button-clear button-dark" ui-sref="events"></a>
+              <h1 class="title">{{event.title}}</h1>
+            </ion-header-bar>
+
+            <ion-content padding="true" ng-init="loadMap()" scroll="false">
+              <label class="item item-input">
+                <span class="input-label">Lieu</span>
+                <input type="text" ng-model="event.place" />
+              </label>
+
+              <div class="item item-input">
+                <span class="input-label">Adresse</span>
+                <input type="text" id="adress-edit" ng-model="event.adress" style="padding: 0;" />
+                <button class="button ion-android-locate button-clear button-dark" ng-click="locateUser()" style="margin-right: 10px;"/>
+              </div>
+
+              <div id="google-map" data-tap-disabled="true" style="width:100%; height:80%" ng-show="event.adress != undefined"></div>
+            </ion-content>
+          </ion-tab>
+
+
+
+          <ion-tab title="Mes amis" icon-off="ion-ios-people-outline" icon-on="ion-ios-people">
+
+            <ion-header-bar>
+              <a class="button icon-left ion-chevron-left button-clear button-dark" ui-sref="events"></a>
+              <h1 class="title">{{event.title}}</h1>
+            </ion-header-bar>
+
+            <ion-floating-menu menu-icon="ion-plus-round" menu-color="#444" menu-open-color="#444" has-footer="true">
+              <ion-floating-item icon="ion-iphone" button-color="#444" text="Contacts du téléphone" click="openModalAddContactFriends()"></ion-floating-item>
+              <ion-floating-item icon="ion-plus-round" button-color="#444" text="Contacts ourEvents" click="openModalAddFriends()"></ion-floating-item>
+            </ion-floating-menu>
+
+            <ion-content ng-init="loadFriends()">
+              <ion-list>
+                <div class="item item-divider">
+                  Amis participants à l'évènement
+                </div>
+                <ion-item ng-repeat="friend in linkedFriends" item="friend" class="item-remove-animate item-avatar item-icon-right" type="item-text-wrap">
+                  <img src="img/friend-default.png">
+                  <h3>{{friend.lastname}} {{friend.firstname}}</h3>
+                  <p>Tel : {{friend.phone}}</p>
+
+
+                  <ion-option-button class="button-assertive" ng-click="removeFriend(friend)">
+                    Supprimer
+                  </ion-option-button>
+                </ion-item>
+              </ion-list>
+            </ion-content>
+          </ion-tab>
+        </ion-tabs>
+      </ion-view>
